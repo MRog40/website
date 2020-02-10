@@ -1,0 +1,98 @@
+{
+    "cnt": 2,
+    "list": [
+        {
+            "coord": {
+                "lon": -103.23,
+                "lat": 44.08
+            },
+            "sys": {
+                "type": 1,
+                "id": 5623,
+                "message": 0.0069,
+                "country": "US",
+                "sunrise": 1557315303,
+                "sunset": 1557367427
+            },
+            "weather": [
+                {
+                    "id": 500,
+                    "main": "Rain",
+                    "description": "light rain",
+                    "icon": "10d"
+                },
+                {
+                    "id": 600,
+                    "main": "Snow",
+                    "description": "light snow",
+                    "icon": "13d"
+                },
+                {
+                    "id": 701,
+                    "main": "Mist",
+                    "description": "mist",
+                    "icon": "50d"
+                }
+            ],
+            "main": {
+                "temp": 36.81,
+                "pressure": 1019,
+                "humidity": 93,
+                "temp_min": 32,
+                "temp_max": 39.99
+            },
+            "visibility": 12874,
+            "wind": {
+                "speed": 19.46,
+                "deg": 340
+            },
+            "clouds": {
+                "all": 90
+            },
+            "dt": 1557353933,
+            "id": 5768233,
+            "name": "Rapid City"
+        },
+        {
+            "coord": {
+                "lon": -94.67,
+                "lat": 38.98
+            },
+            "sys": {
+                "type": 1,
+                "id": 4246,
+                "message": 0.0115,
+                "country": "US",
+                "sunrise": 1557313977,
+                "sunset": 1557364644
+            },
+            "weather": [
+                {
+                    "id": 803,
+                    "main": "Clouds",
+                    "description": "broken clouds",
+                    "icon": "04d"
+                }
+            ],
+            "main": {
+                "temp": 71.71,
+                "pressure": 1004,
+                "humidity": 53,
+                "temp_min": 70,
+                "temp_max": 73.4
+            },
+            "visibility": 16093,
+            "wind": {
+                "speed": 11.41,
+                "deg": 220,
+                "gust": 8.7
+            },
+            "clouds": {
+                "all": 75
+            },
+            "dt": 1557353933,
+            "id": 4276873,
+            "name": "Overland Park"
+        }
+    ]
+}

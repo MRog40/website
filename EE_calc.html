@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<link rel="stylesheet" href="assets/css/style.css">
+		<link rel="stylesheet" href="assets/line-awesome/css/line-awesome.min.css">
+		<meta name="description" content="Michael Rogers is an Electrical Engineering student at SDSM&t.">
+		<meta name="keywords"
+			content="michael rogers sdsm&t garmin personal website electrical engineer hire me job resume coding 
+				programming javascript html embedded systems architecture prototype design">
+		<meta name="author" content="Michael Rogers">
+		<title>Michael Rogers</title>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet">
+		<link rel="shortcut icon" href="assets/favicons/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+		<link rel="manifest" href="assets/favicons/site.webmanifest">
+		<link rel="mask-icon" href="assets/favicons/safari-pinned-tab.svg" color="#282c34">
+		<meta name="msapplication-TileColor" content="#282c34">
+		<meta name="theme-color" content="#000000">
+		<link rel="stylesheet" href="assets/css/prism.css">
+		<script src="assets/js/prism.js"></script>
+	</head>
+	<body>
+		<div class="sidenav">
+			<a  href="index.html" title="Home"><img src="assets/img/logo.png" height="35"></a>
+			<a  href="about.html" title="About"><i class="la la-user"></i></a>
+			<a  href="courses.html" title="Courses"><i class="la la-file-text"></i></a>
+			<a  href="tools.html" title="Tools"><i class="la la-wrench"></i></a>
+			<a  href="games.html" title="Games"><i class="la la-gamepad"></i></a>
+			<a  class="active" href="code.html" title="Code"><i class="la la-code-fork"></i></a>
+			<a  href="resume.html" title="Resume"><i class="la la-file"></i></a>
+			<a  href="contact.html" title="Contact"><i class="la la-envelope"></i></a>
+		</div>
+		<!-- Page content -->
+		<div class="main">
+			<p>
+				<span class="title">EE Calc (Not final version)</span>
+				<br>
+				<pre>
+					<code class="language-python">
+# Batch file
+# python -i C:/Users/7258163/Documents/Python_Scripts/EE_Workspace.py %*
+# Exe Command
+# C:\Windows\System32\cmd.exe /k C:\Users\7258163\Documents\EE_Workspace.bat
+
+def printheader():
+    print("\n**************************************************")
+    print("*                    EE Calc                     *")
+    print("**************************************************\n")
+
+# LIBRARIES
+import os
+import numpy as np
+import sympy as sp
+import matplotlib.pyplot as plt
+
+printheader()
+
+# WINDOW CONTROL FUNCTIONS
+def clc():
+    os.system('cls')
+    printheader() # Clear the command line
+clear = clc # Equivalent
+
+def varList():
+    print([item for item in dir() if not item.startswith("__")])
+    # print("\nCurrent Variables\n-----------------")
+    # for variable in dir()[index:]:
+    #     print(variable)
+
+# BASIC MATH FUNCTIONS
+pi = np.pi
+log = np.log10
+sqrt = np.sqrt
+sin = np.sin
+cos = np.cos
+tan = np.tan
+acos = np.arccos
+asin = np.arcsin
+atan = np.arctan
+ln = np.log
+exp = np.exp
+angle = np.angle
+roots = np.roots
+
+# CONSTANTS
+j = 1j
+c = 2.99792458129e8
+epsilon = 8.85418782e-12
+mu = pi*4e-7
+
+# MATLAB SUBSTITUTE FUNCTIONS
+plot = plt.plot; plt.show
+range = np.arange
+solve = sp.solveset
+def syms(vars):
+    items = []
+    for var in vars:
+        items.append(sp.Symbol(var))
+    return items
+def symbolics():
+    pi = sp.pi
+    sqrt = sp.sqrt
+    sin = sp.sin
+    cos = sp.cos
+    tan = sp.tan
+    acos = sp.acos
+    asin = sp.asin
+    atan = sp.atan
+    ln = sp.log
+    exp = sp.exp
+    roots = sp.roots
+    expand = sp.expand
+    trigsimp = sp.trigsimp
+    simplify = sp.simplify
+
+# UNIT CONVERSION
+def ft2meter(feet):
+    return feet*0.3048 # Convert feet to meters
+def meter2ft(meter):
+    return meter/0.3048 # Convert meters to feet
+
+def F2C(F):
+    return (F - 32) * 5/9 # Convert Fahrenheit to Celsius
+def C2F(C):
+    return (C * 9/5) + 32 # Convert Celsius to Fahrenheit
+
+rad2deg = np.rad2deg # Convert radians to degrees
+deg2rad = np.deg2rad # Convert degrees to radians
+
+# FORMAT PRINT FUNCTIONS
+def eng(x):
+    print(EngNumber(x)) # Print number using engineering format
+
+def engu(x, units):
+    print(EngNumber(x), end ='')
+    print(units) # Print number using engineering format and units
+
+def printphase(complex, newline = True):
+    print(round(abs(complex),4), end = '')
+    print(u'\u2220', end = '')
+    print(round(rad2deg(angle(complex)),2), end = '')
+    if newline:
+        print(u'\u00B0', end = '\n') # Print phasor format of complex number
+    elif not newline:
+        print(u'\u00B0', end = '')
+
+# ELECTRICAL ENGINEERING FUNCTIONS
+def EngNumber(obj, digits=5):
+    unitMap = {'Y':1e24, 'Z':1e21, 'E':1e18, 'P':1e15, 'T':1e12, 'G':1e9, 'M':1e6, 
+    'k':1e3, '':1, 'm':1e-3, 'u':1e-6, 'n':1e-9, 'p':1e-12, 'f':1e-15, 'a':1e-18, 'z':1e-21, 'y':1e-24};
+
+    for unit, value in unitMap.items():
+        if(obj >= value*100):           # TODO: More elegant solution for this
+            return removeZeros(str(round((obj / value), digits - 3))) + unit
+        elif(obj >= value*10):
+            return removeZeros(str(round((obj / value), digits - 2))) + unit
+        elif(obj >= value):
+            return removeZeros(str(round((obj / value), digits - 1))) + unit # Used internally, equivalent to eng()
+
+def removeZeros(obj):
+    if(obj[-1] == '.' and obj[-2] == '0'):
+        return obj[0:-1]
+    elif((obj[-1] == '0' or obj[-1] == '.')):
+        return removeZeros(obj[0:-1]) # Recursion! v cool
+    else:
+        return obj # Used Internally to remove trailing zeros
+
+def para(*args):
+    return 1/sum([1/arg for arg in args]) # Return the product over the sum
+
+def addRMS(*args):
+    return np.sqrt(sum([arg**2 for arg in args])) # Return the square root of the sum of the squares
+
+def res(l, c):
+    return 1/(2*pi*np.sqrt(l*c)) # Resonant frequency of LC network
+
+def phase(degrees):
+    radians = deg2rad(degrees)
+    return cos(radians) + j*sin(radians) # Phasor equivalent to angle symbol in degrees
+
+def inputImp(Zl, Zo, Bl): # TODO
+    return "TODO"
+
+def Bl(f, Vp): # TODO
+    return "TODO"
+
+def reflectionCoeff(Zl, Zo):
+    return (Zl-Zo)/(Zl+Zo) # Reflection coefficient from load and characteristic impedance
+
+def VSWR(gamma):
+    return (1+abs(gamma))/(1-abs(gamma)) # Standing wave ratio from reflection coefficient
+
+def shuntStubImpOC(Zo, Bl):
+    return -j*Zo/tan(Bl) # Shunt Open Circuit Stub Impedance from characteristic impedance and electrical length (beta(phase constant) * length)
+
+def shuntStubImpSC(Zo, Bl):
+    return -j*Zo*tan(Bl) # Shunt Short Circuit Stub Impedance from characteristic impedance and electrical length (beta(phase constant) * length)
+
+def hex2rgb(hex):
+    if hex[0] is '#':
+        hex = hex[1:]
+    if len(hex) is 3:
+        print('rgb(' + str((int(hex[0], 16)*16 + 15)) + ', ' 
+            + str((int(hex[1], 16)*16 + 15)) + ', ' + str((int(hex[2], 16)*16 + 15)) + ')')
+        print(str((int(hex[0], 16)*16 + 15)) + str((int(hex[1], 16)*16 + 15)) + str((int(hex[2], 16)*16 + 15)))
+    else:
+        print('rgb(' + str(int(hex[0:2], 16)) + ', ' 
+            + str(int(hex[2:4], 16)) + ', ' + str(int(hex[4:6], 16)) + ')')
+        print(str(int(hex[0:2], 16)) + str(int(hex[2:4], 16)) + str(int(hex[4:6], 16)))
+
+# HELP SECTION
+def calcHelp():
+    print("\n************ Calculator Help Section *************")
+    print("\n************     Coming Soon TM      *************")
+
+</code>
+				</pre>
+			</p>
+			<!-- Media Links at bottom of page-->
+			<div class="socialmedia">
+				<a target="_blank" href="https://www.linkedin.com/in/michael-rogers-sdsmt/" title="LinkedIn"><i class="la la-linkedin"></i></a>
+				<a target="_blank" href="https://www.facebook.com/profile.php?id=100030064087170" title="Facebook"><i class="la la-facebook"></i></a>
+				<a target="_blank" href="https://github.com/MRog40" title="Github"><i class="la la-github"></i></a>
+				<a target="_blank" href="mailto:michael.rogers@mines.sdsmt.edu" title="Email"><i class="la la-envelope"></i></a>
+			</div>
+		</div>
+  </body>
+</html>
